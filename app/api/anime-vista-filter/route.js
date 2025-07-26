@@ -8,10 +8,10 @@ export const GET = async (request) => {
         const season = searchParams.get("season");
         const year = searchParams.get("year");
         const genre = searchParams.get("genre");
+        const search = searchParams.get("search");
 
         await connectMongoDB();
 
-        // Build the filter object dynamically
         let filter = {};
 
         if (season) {
@@ -23,11 +23,11 @@ export const GET = async (request) => {
         }
 
         if (genre) {
-            // Since genres is an array, we need to check if the genre exists in the array
             filter.genres = { $elemMatch: { $regex: new RegExp(genre, 'i') } };
         }
 
-        // Apply filters to the query - all filters are combined with AND logic
+        if (search) filter.animeName = { $regex: search, $options: "i" };
+
         const animeList = await AnimeList.find(filter);
 
         return NextResponse.json({
