@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function Home() {
-  async function getApiAnimeList() {
+  /*async function getApiAnimeList() {
     try {
       const res = await fetch("/api/anime-vista-list", {
         headers: {
@@ -25,6 +25,6 @@ export default function Home() {
 
   useEffect(() => {
     getApiAnimeList();
-  }, []);
+  }, []);*/
   return <div></div>;
 }
